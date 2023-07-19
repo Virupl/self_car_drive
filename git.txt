@@ -1,0 +1,54 @@
+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
+
+git 
+git pull
+
+git pull --rebase 
+
+
+git push origin HEAD:master
+
+git checkout master
+
+git rebase --continue 
+
+git pull
+
+git push
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+git stash
+
+git pull 
+
+
+git stash pop
+
+if conflict
+ git add . 
+ git commit -m ""
+
+
+git push
+
+
+
+
+
+
+
+git fetch command use for fetch all branches and updaed repo
+
+git fetch --all
