@@ -27,5 +27,6 @@ car_image = pygame.Surface((30, 50), pygame.SRCALPHA)
 
 ld = "asdasd"
 cvzcvz = "asdasd"
+asdasd="adsasd"
 # Detected Cars
 detected_cars = []
