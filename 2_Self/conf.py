@@ -25,6 +25,5 @@ road = Road(screen_width / 2, screen_width * 0.9)
 # Create a surface for the car image
 car_image = pygame.Surface((30, 50), pygame.SRCALPHA)
 
-
 # Detected Cars
 detected_cars = []
