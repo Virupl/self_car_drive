@@ -33,8 +33,19 @@ clock = pygame.time.Clock()
 # if LANE_INDEX = 2 Car Right side
 LANE_INDEX = 1
 car_ori_height = car_image.get_height()
-car = Car(road.getLaneCenter(LANE_INDEX),
-          height - 100 - car_ori_height, 40, 70, "AI")
+
+
+def generateCars(N):
+    cars = []
+    for _ in range(0, N):
+        cars.append(Car(road.getLaneCenter(LANE_INDEX),
+                    height - 100 - car_ori_height, 40, 70, "AI"))
+
+    return cars
+
+
+N = 100
+cars = generateCars(N)
 
 pygame.Surface.convert_alpha(car_image)
 car_image.set_colorkey((0, 0, 0))
@@ -45,7 +56,7 @@ traffic_cars = [
     Car(road.getLaneCenter(3), 400, 40, 70, "DUMMY", 3, RED)
 ]
 
-bestCar = car
+bestCar = cars[0]
 
 # # Create a Save button instance
 save_button = Button((335, 300, 40, 40),
@@ -85,9 +96,9 @@ def read_data():
     try:
         with open(file_path, 'rb') as file:
             data = pickle.load(file)
-            car.brain = data['BestBrain']
+            bestCar.brain = data['BestBrain']
 
-            NeuralNetwork.mutate(car.brain, 0.1)
+            NeuralNetwork.mutate(bestCar.brain, 0.1)
 
     except EOFError:
         if EOFError:
@@ -100,7 +111,9 @@ read_data()
 
 
 def animate():
-    car.update(road.borders, traffic_cars)
+    global bestCar
+    for car in cars:
+        car.update(road.borders, traffic_cars)
 
     for t in traffic_cars:
         t.update(road.borders, [])
@@ -110,7 +123,13 @@ def animate():
     networkCtx.fill(BLACK)
 
     road.draw(screen, car)
-    car.draw(screen, traffic_cars)
+
+    for car in cars:
+        car.draw(screen, traffic_cars)
+
+    bestCar = min(cars, key=lambda c: c.y)
+
+    bestCar.draw(screen, traffic_cars, True)
 
     for t in traffic_cars:
         t.draw(screen, [])
@@ -118,7 +137,7 @@ def animate():
     save_button.draw(window)
     delete_button.draw(window)
 
-    Visualizer_2.drawNetwork(networkCtx, car.brain)
+    Visualizer_2.drawNetwork(networkCtx, bestCar.brain)
 
     # Blit the Screen on the Window
     window.blit(screen, (screen_x, 0))
@@ -135,11 +154,11 @@ if __name__ == '__main__':
             if event.type == pygame.QUIT:
                 running = False
             else:
-                match car.controls.type:
+                match bestCar.controls.type:
                     case "AI":
-                        car.controls.handle_event(event)
+                        bestCar.controls.handle_event(event)
                     case "DUMMY":
-                        car.controls.forward = True
+                        cars[0].controls.forward = True
                         # self.speed = 3
 
                 save_button.handle_event(event)

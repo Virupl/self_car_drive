@@ -10,6 +10,7 @@ GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 YELLOW = (255, 255, 0)
 GRAY = (150, 150, 150)
+DAMAGE_CAR_COLOR = (92, 92, 92)
 
 
 window_width = 800

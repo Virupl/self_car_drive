@@ -3,7 +3,7 @@ import pygame
 
 from Sensor import Sensor
 from Controls import Controls
-from conf import BLUE, RED, YELLOW, BLACK, car_image
+from conf import BLUE, RED, YELLOW, BLACK, DAMAGE_CAR_COLOR, car_image
 from Network import NeuralNetwork
 from utils import polysIntersect
 
@@ -166,9 +166,9 @@ class Car:
             else:
                 sensor.color = YELLOW  # Default color
 
-    def draw(self, screen, traffic_cars):
+    def draw(self, screen, traffic_cars, drawSensor=False):
         if self.damaged:
-            car_image.fill(BLACK)
+            car_image.fill(DAMAGE_CAR_COLOR)
         else:
             car_image.fill(self.color)
 
@@ -184,4 +184,5 @@ class Car:
 
         # Draw the sensors
         for sensor in self.sensors:
-            sensor.draw(screen, traffic_cars)
+            if (sensor and drawSensor):
+                sensor.draw(screen, traffic_cars)
