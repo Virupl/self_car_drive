@@ -14,6 +14,8 @@ from Button import Button
 # Initialize Pygame
 pygame.init()
 
+# font = pygame.font.SysFont("Arial", 5)
+
 height = pygame.display.Info().current_h
 
 window = pygame.display.set_mode((window_width, height))
@@ -96,9 +98,11 @@ def read_data():
     try:
         with open(file_path, 'rb') as file:
             data = pickle.load(file)
+        for i in range(0, len(cars)):
             bestCar.brain = data['BestBrain']
 
-            NeuralNetwork.mutate(bestCar.brain, 0.1)
+            if i != 0:
+                NeuralNetwork.mutate(bestCar.brain, 0.1)
 
     except EOFError:
         if EOFError:
