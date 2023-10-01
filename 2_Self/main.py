@@ -2,11 +2,11 @@ import pygame
 import pickle
 import os
 from pathlib import Path
-# from pprint import pprint
+
 
 from Car import Car, car_image
 from conf import window_width, screen_width, networkCtx_width, road, WHITE, GRAY, RED, BLACK
-from Visualizer import Visualizer_2
+from Visualizer import Visualizer
 from Network import NeuralNetwork
 from Button import Button
 
@@ -17,17 +17,11 @@ pygame.init()
 # font = pygame.font.SysFont("Arial", 5)
 
 height = pygame.display.Info().current_h
-
 window = pygame.display.set_mode((window_width, height))
-
 screen_x = (window_width - screen_width) // 5
-
 screen = pygame.Surface((screen_width, height))
-
 networkCtx_x = (window_width - networkCtx_width) // 1.3
-
 networkCtx = pygame.Surface((networkCtx_width, height-70))
-
 clock = pygame.time.Clock()
 
 # if LANE_INDEX = 0 Car Left side
@@ -46,7 +40,7 @@ def generateCars(N):
     return cars
 
 
-N = 100
+N = 1
 cars = generateCars(N)
 
 pygame.Surface.convert_alpha(car_image)
@@ -141,7 +135,7 @@ def animate():
     save_button.draw(window)
     delete_button.draw(window)
 
-    Visualizer_2.drawNetwork(networkCtx, bestCar.brain)
+    Visualizer.drawNetwork(networkCtx, bestCar.brain)
 
     # Blit the Screen on the Window
     window.blit(screen, (screen_x, 0))
