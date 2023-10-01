@@ -2,7 +2,6 @@ import pygame
 import pickle
 import os
 from pathlib import Path
-from playsound import playsound
 
 from Car import Car, car_image
 from conf import window_width, screen_width, networkCtx_width, road, WHITE, GRAY, RED, BLACK
