@@ -27,6 +27,30 @@ class NeuralNetwork:
 
         return outputs
 
+    @staticmethod
+    def mutate(self, mutation_rate, mutation_amount=0.1):
+        for i in range(self.input_size):
+            for j in range(self.hidden_size):
+                if random.random() < mutation_rate:
+                    self.weights_input_hidden[i][j] += random.uniform(
+                        -mutation_amount, mutation_amount)
+
+        for i in range(self.hidden_size):
+            for j in range(self.output_size):
+                if random.random() < mutation_rate:
+                    self.weights_hidden_output[i][j] += random.uniform(
+                        -mutation_amount, mutation_amount)
+
+        for i in range(self.hidden_size):
+            if random.random() < mutation_rate:
+                self.biases_hidden[i] += random.uniform(-mutation_amount,
+                                                        mutation_amount)
+
+        for i in range(self.output_size):
+            if random.random() < mutation_rate:
+                self.biases_output[i] += random.uniform(-mutation_amount,
+                                                        mutation_amount)
+
     # @staticmethod
     # def mutate(network, amount=1):
     #     for level in network.levels:
@@ -53,30 +77,6 @@ class NeuralNetwork:
         output_layer = [self.sigmoid(sum([hidden_layer[j] * self.weights_hidden_output[i][j]
                                      for j in range(self.hidden_size)]) + self.biases_output[i]) for i in range(self.output_size)]
         return output_layer
-
-    @staticmethod
-    def mutate(self, mutation_rate, mutation_amount=0.1):
-        for i in range(self.input_size):
-            for j in range(self.hidden_size):
-                if random.random() < mutation_rate:
-                    self.weights_input_hidden[i][j] += random.uniform(
-                        -mutation_amount, mutation_amount)
-
-        for i in range(self.hidden_size):
-            for j in range(self.output_size):
-                if random.random() < mutation_rate:
-                    self.weights_hidden_output[i][j] += random.uniform(
-                        -mutation_amount, mutation_amount)
-
-        for i in range(self.hidden_size):
-            if random.random() < mutation_rate:
-                self.biases_hidden[i] += random.uniform(-mutation_amount,
-                                                        mutation_amount)
-
-        for i in range(self.output_size):
-            if random.random() < mutation_rate:
-                self.biases_output[i] += random.uniform(-mutation_amount,
-                                                        mutation_amount)
 
 
 class Level:
