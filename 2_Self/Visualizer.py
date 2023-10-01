@@ -2,7 +2,7 @@ import pygame
 from utils import lerp, getRGB
 
 
-class Visualizer_2:
+class Visualizer:
     @staticmethod
     def drawNetwork(screen, network):
         margin = 50
@@ -18,7 +18,7 @@ class Visualizer_2:
                                        (0.5 if len(network.levels) == 1 else i / (len(network.levels))))
             # ["🠉", "🠈", "🠊", "🠋"]
             # ["W", "A", "D", "S"]
-            Visualizer_2.drawLevel(
+            Visualizer.drawLevel(
                 screen, network.levels[i], left, levelTop, width, levelHeight, ["W", "A", "D", "S"] if i == len(network.levels) - 1 else [])
 
     @staticmethod
@@ -35,9 +35,9 @@ class Visualizer_2:
 
         for i in range(len(inputs)):
             for j in range(len(outputs)):
-                start_x = Visualizer_2.get_node_x(inputs, i, left, right)
+                start_x = Visualizer.get_node_x(inputs, i, left, right)
                 start_y = bottom - 50
-                end_x = Visualizer_2.get_node_x(outputs, j, left, right)
+                end_x = Visualizer.get_node_x(outputs, j, left, right)
                 end_y = top + 50
 
                 # pygame.draw.line(screen, getRGB(weights[i][j]),
@@ -50,7 +50,7 @@ class Visualizer_2:
         nodeRadius = 18
 
         for i in range(len(inputs)):
-            x = Visualizer_2.get_node_x(inputs, i, left, right)
+            x = Visualizer.get_node_x(inputs, i, left, right)
 
             # Background Black Circle
             pygame.draw.circle(screen, (0, 0, 0),
@@ -65,7 +65,7 @@ class Visualizer_2:
                                (int(x), int(bottom - 50)), nodeRadius*0.6, 18)
 
         for i in range(len(outputs)):
-            x = Visualizer_2.get_node_x(outputs, i, left, right)
+            x = Visualizer.get_node_x(outputs, i, left, right)
 
             # Background Black Circle
             pygame.draw.circle(screen, (0, 0, 0),

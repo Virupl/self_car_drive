@@ -2,10 +2,11 @@ import pygame
 import pickle
 import os
 from pathlib import Path
+from playsound import playsound
 
 from Car import Car, car_image
 from conf import window_width, screen_width, networkCtx_width, road, WHITE, GRAY, RED, BLACK
-from Visualizer import Visualizer_2
+from Visualizer import Visualizer
 from Network import NeuralNetwork
 from Button import Button
 
@@ -135,7 +136,7 @@ def animate():
     save_button.draw(window)
     delete_button.draw(window)
 
-    Visualizer_2.drawNetwork(networkCtx, bestCar.brain)
+    Visualizer.drawNetwork(networkCtx, bestCar.brain)
 
     # Blit the Screen on the Window
     window.blit(screen, (screen_x, 0))
