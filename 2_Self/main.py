@@ -40,7 +40,7 @@ def generateCars(N):
     return cars
 
 
-N = 100
+N = 10
 cars = generateCars(N)
 
 pygame.Surface.convert_alpha(car_image)
