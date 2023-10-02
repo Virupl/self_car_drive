@@ -2,7 +2,7 @@ import pygame
 import math
 
 from utils import getIntersection1, getIntersection2, lerp
-from conf import RED, road, detected_cars
+from conf import RED, BLACK, YELLOW, road, detected_cars
 
 
 class Sensor:
@@ -13,10 +13,10 @@ class Sensor:
         self.car = car
         self.angle = sensor_angle
         self.offset = 0
-        self.color = RED
+        self.color = YELLOW
         self.rays = []
 
-        self.detected_color = RED
+        self.detected_color = BLACK
 
     def update(self, roadBorders, traffic):
         self.castRays()
@@ -171,8 +171,8 @@ class Sensor:
             if self.readings[i]:
                 end = self.readings[i]
 
-            pygame.draw.line(screen, (255, 255, 0), (start_x, start_y),
+            pygame.draw.line(screen, YELLOW, (start_x, start_y),
                              (end['x'], end['y']), 2)
 
             pygame.draw.line(
-                screen, (0, 0, 0), (self.rays[i][1]['x'], self.rays[i][1]['y']), (end['x'], end['y']), 2)
+                screen, BLACK, (self.rays[i][1]['x'], self.rays[i][1]['y']), (end['x'], end['y']), 2)

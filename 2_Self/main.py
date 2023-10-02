@@ -40,7 +40,7 @@ def generateCars(N):
     return cars
 
 
-N = 1
+N = 100
 cars = generateCars(N)
 
 pygame.Surface.convert_alpha(car_image)
@@ -53,6 +53,7 @@ traffic_cars = [
 ]
 
 bestCar = cars[0]
+
 
 # # Create a Save button instance
 save_button = Button((335, 300, 40, 40),
@@ -127,10 +128,10 @@ def animate():
 
     bestCar = min(cars, key=lambda c: c.y)
 
-    bestCar.draw(screen, traffic_cars, True)
-
     for t in traffic_cars:
         t.draw(screen, [])
+
+    bestCar.draw(screen, traffic_cars, True)
 
     save_button.draw(window)
     delete_button.draw(window)

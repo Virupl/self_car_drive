@@ -60,7 +60,7 @@ def getRGB(value):
     G = R
     B = 0 if value > 0 else 255
 
-    return (R, G, B, 100)
+    return (R, G, B, alpha)
 
     # # Define the color with RGBA values
     # red = 255
